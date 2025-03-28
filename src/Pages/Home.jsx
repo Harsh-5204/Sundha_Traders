@@ -81,65 +81,31 @@ export default function Home() {
           <Link to='/shop'>
           <div className="home-contain rounded-0 p-0 position-relative ">
             <img 
-              src="https://images-eu.ssl-images-amazon.com/images/G/31/img23/Beauty/GW/Mar/updated/makeup_PCz._CB547914085_.png" 
+              src="../assets/images/grocery/banner/33.jpg" 
               className="img-fluid bg-img blur-up lazyload w-100" 
               
               alt="Banner 1" 
             />
-            {/* <div className="home-detail home-big-space position-absolute top-0 start-0 p-5 text-start ms-5">
-              <h6 className="ls-expanded theme-color text-uppercase">Weekend Special offer</h6>
-              <h1 className="heding-2">Premium Quality Dry Fruits</h1>
-              <h2 className="content-2">Dryfruits shopping made Easy</h2>
-              <h5 className="text-content">Fresh & Top Quality Dry Fruits are available here!</h5>
-
-              <button 
-                className="btn theme-bg-color btn-md text-white fw-bold mt-md-4 mt-2" 
-                
-              >
-                Shop Now <i className="fa-solid fa-arrow-right icon" />
-              </button>
-            </div> */}
+            
           </div>
           </Link>
           
           <div className="home-contain rounded-0 p-0 position-relative">
             <img 
-              src="https://img.freepik.com/free-photo/shopping-concept-close-up-portrait-young-beautiful-attractive-redhair-girl-smiling-looking-camera_1258-126800.jpg?t=st=1743057940~exp=1743061540~hmac=051576f9f417fe2d27575ea9b415c18c05187999d0714a68fa5668fc68687e20&w=1380" 
+              src="../assets/images/grocery/banner/22.jpg" 
               className="img-fluid bg-img blur-up lazyload w-100" 
               alt="Banner 1" 
             />
-            <div className="home-detail home-big-space position-absolute top-0 start-0 p-5 text-start ms-5">
-              <h6 className="ls-expanded theme-color text-uppercase">Weekend Special offer</h6>
-              <h1 className="heding-2">Premium Quality Dry Fruits</h1>
-              <h2 className="content-2">Dryfruits shopping made Easy</h2>
-              <h5 className="text-content">Fresh & Top Quality Dry Fruits are available here!</h5>
-              <button 
-                className="btn theme-bg-color btn-md text-white fw-bold mt-md-4 mt-2" 
-                onClick={() => window.location.href = 'shop-left-sidebar.html'}
-              >
-                Shop Now <i className="fa-solid fa-arrow-right icon" />
-              </button>
-            </div>
+            
           </div>
           
           <div className="home-contain rounded-0 p-0 position-relative">
             <img 
-              src="../assets/images/grocery/banner/1.jpg" 
+              src="../assets/images/grocery/banner/11.jpg" 
               className="img-fluid bg-img blur-up lazyload w-100" 
               alt="Banner 1" 
             />
-            <div className="home-detail home-big-space position-absolute top-0 start-0 p-5 text-start ms-5">
-              <h6 className="ls-expanded theme-color text-uppercase">Weekend Special offer</h6>
-              <h1 className="heding-2">Premium Quality Dry Fruits</h1>
-              <h2 className="content-2">Dryfruits shopping made Easy</h2>
-              <h5 className="text-content">Fresh & Top Quality Dry Fruits are available here!</h5>
-              <button 
-                className="btn theme-bg-color btn-md text-white fw-bold mt-md-4 mt-2" 
-                onClick={() => window.location.href = 'shop-left-sidebar.html'}
-              >
-                Shop Now <i className="fa-solid fa-arrow-right icon" />
-              </button>
-            </div>
+            
           </div>
         </Slider> 
         </div>
