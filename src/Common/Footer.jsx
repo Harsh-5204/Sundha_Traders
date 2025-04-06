@@ -11,10 +11,9 @@ export default function Footer() {
         <div className="col-xxl-3 col-xl-4 col-sm-6">
           <Link to="/" className="foot-logo theme-logo">
           {/* <h1>Maa Sundha Traders</h1> */}
-            <img src="../assets/images/logo/without_bg.png" style={{height:'130px'}} className="img-fluid blur-up lazyload" alt />
+            <img src="../assets/images/logo/3.png" style={{height:'130px' }} className="img-fluid blur-up lazyload" alt />
           </Link>
-          <p className="information-text information-text-2">it is a long established fact that a reader will
-            be distracted by the readable content.</p>
+          <p className="information-text information-text-2">Your One-Stop Supermarket! Sundha Traders is a leading supermarket owned by Nikhil Kumavat </p>
           <ul className="social-icon">
             <li className="light-bg">
               <a href="https://www.facebook.com/" className="footer-link-color">
@@ -71,20 +70,20 @@ export default function Footer() {
           </div>
           <ul className="footer-list footer-list-light footer-contact">
             <li>
-              <a href="order-success.html" className="light-text">Your Order</a>
+              <Link to="/" className="light-text">Home</Link>
             </li>
             <li>
-              <a href="user-dashboard.html" className="light-text">Your Account</a>
+              <Link to="/shop" className="light-text">Shop</Link>
             </li>
             <li>
-              <a href="order-tracking.html" className="light-text">Track Orders</a>
+              <Link to="/about" className="light-text">About Us</Link>
             </li>
             <li>
-              <a href="wishlist.html" className="light-text">Your Wishlist</a>
+              <Link to="/contact" className="light-text">Contact Us</Link>
             </li>
-            <li>
+            {/* <li>
               <a href="faq.html" className="light-text">FAQs</a>
-            </li>
+            </li> */}
           </ul>
         </div>
         <div className="col-xxl-2 col-xl-4 col-sm-6">

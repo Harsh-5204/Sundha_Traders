@@ -3,7 +3,11 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   const [mobileSearchVisible, setMobileSearchVisible] = useState(false);
-  const [mediumSearchVisible, setMediumSearchVisible] = useState(false);
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
 
   return (
     <div className="link-remover">
@@ -25,8 +29,8 @@ export default function Header() {
                   </button>
                   <Link to="/" className="web-logo nav-logo">
                     <img
-                      src="../assets/images/logo/without_bg.png"
-                      style={{ height: "100px" }}
+                      src="../assets/images/logo/4.png"
+                      style={{ height: "120px", width: "100%" }}
                       className="img-fluid blur-up lazyload"
                       alt
                     />
@@ -90,13 +94,12 @@ export default function Header() {
                           <button
                             className="btn btn-danger ms-2"
                             onClick={() => setMobileSearchVisible(false)}
-                          
                           >
                             <i className="fa fa-close" />
                           </button>
                         </div>
                       )}
-                      
+
                       {/* Medium Search Icon (Hidden when input is visible) */}
                       {/* {!mediumSearchVisible && (
                         <button
@@ -176,16 +179,30 @@ export default function Header() {
                   >
                     <div className="offcanvas-header navbar-shadow">
                       <h5>Menu</h5>
+                      <button
+                        type="button"
+                        className="btn-close text-reset"
+                        data-bs-dismiss="offcanvas"
+                        aria-label="Close"
+                      />
                     </div>
                     <div className="offcanvas-body">
                       <ul className="navbar-nav">
                         <li className="nav-item">
-                          <Link className="nav-link ps-0" to="/">
+                          <Link
+                            className="nav-link ps-0"
+                            to="/"
+                            // data-bs-dismiss="offcanvas"
+                          >
                             Home
                           </Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link" to="/shop">
+                          <Link
+                            className="nav-link"
+                            to="/shop"
+                            // data-bs-dismiss="offcanvas"
+                          >
                             Shop
                           </Link>
                         </li>
@@ -193,7 +210,11 @@ export default function Header() {
                     <Link className="nav-link" href="product-list.html">Products</Link>
                   </li> */}
                         <li className="nav-item">
-                          <Link className="nav-link" to="/about">
+                          <Link
+                            className="nav-link"
+                            to="/about"
+                            // data-bs-dismiss="offcanvas"
+                          >
                             About Us
                           </Link>
                         </li>
@@ -201,10 +222,15 @@ export default function Header() {
                     <a className="nav-link" href="about-us.html">About Us</a>
                   </li> */}
                         <li className="nav-item">
-                          <Link className="nav-link" to="/contact">
+                          <Link
+                            className="nav-link"
+                            to="/contact"
+                            // data-bs-dismiss="offcanvas"
+                          >
                             Contact Us
                           </Link>
                         </li>
+                        
                       </ul>
                     </div>
                   </div>
@@ -262,13 +288,13 @@ export default function Header() {
 
           <li>
             <Link to="/contact" className="notifi-wishlist">
-              <i className="iconly-Heart icli" />
+              <i className="iconly-Message icli" />
               <span>Contact </span>
             </Link>
           </li>
           <li>
             <Link to="/about" className="search-box">
-              <i className="iconly-Search icli" />
+              <i className="iconly-Info-Circle icli" />
               <span>About us</span>
             </Link>
           </li>

@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import { Categoryname, ShopData } from "../Apis";
+import { Link, useParams } from "react-router-dom";
+import { Categoryname, Categorywisepro, ShopData } from "../Apis";
 import "../App.css"
 
-export default function Shop() {
+export default function CategoryWise() {
+  let { category_id } = useParams();
   const [sortOption, setSortOption] = useState("Most Popular");
+  const [activeCategory, setActiveCategory] = useState(null);
 
   const {
     isLoading,
     error,
-    data: groceryItems,
+    data: wisedata,
   } = useQuery({
-    queryKey: ["Shop"],
-    queryFn: ShopData,
-    enabled: !!Categoryname,
+    queryKey: ["Categorywisepro", category_id],
+    queryFn: () => Categorywisepro(category_id),
+    enabled: !!category_id,
   });
 
   const {
@@ -22,11 +24,9 @@ export default function Shop() {
     error: error2,
     data: categoryname,
   } = useQuery({
-    queryKey: [Categoryname],
+    queryKey: ["Categoryname"],
     queryFn: Categoryname,
   });
-
- 
 
   const handleSortChange = (option) => {
     setSortOption(option);
@@ -40,7 +40,7 @@ export default function Shop() {
           <div className="row">
             <div className="col-12">
               <div className="breadcrumb-contain">
-                <h2>Shop Category</h2>
+                <h2>CategoryWise Product</h2>
                 <nav>
                   <ol className="breadcrumb mb-0">
                     <li className="breadcrumb-item">
@@ -48,7 +48,9 @@ export default function Shop() {
                         <i className="fa-solid fa-house" />
                       </Link>
                     </li>
-                    <li className="breadcrumb-item active">Shop Category</li>
+                    <li className="breadcrumb-item active">
+                      CategoryWise Product
+                    </li>
                   </ol>
                 </nav>
               </div>
@@ -76,13 +78,13 @@ export default function Shop() {
                       <span>Loading...</span>
                     ) : (
                       categoryname.map((gname) => (
-                        <li className="nav-item" role="presentation" >
+                        <li className="nav-item" role="presentation">
                           <Link
                             to={`/categorywiseproduct/${gname.category_id}`}
-                            className="nav-link"
-                            
+                            className={`nav-link ${activeCategory === gname.category_id ? 'active' : ''}`}
+                            onClick={() => setActiveCategory(gname.category_id)}
                           >
-                            {gname.name} 
+                            {gname.name}
                             <img
                               src={gname.image}
                               className="blur-up lazyload"
@@ -113,7 +115,6 @@ export default function Shop() {
                 className="offcanvas offcanvas-start"
                 tabIndex="-1"
                 id="mobileFilterSidebar"
-                aria-labelledby="offcanvasLabel"
                 style={{
                   backgroundColor: "#f8f9fa", // Light background for contrast
                   width: "280px", // Adjust width for better appearance
@@ -153,20 +154,42 @@ export default function Shop() {
                         <li>Loading...</li>
                       ) : (
                         categoryname.map((cat, index) => (
-                          <li key={index} >
-                            <Link
-                              to={`/categorywiseproduct/${cat.category_id}`}
-                                data-bs-dismiss="offcanvas"
-                            >
-                              <img
-                                src={cat.image}
-                                alt={cat.name}
-                               
-                                style={{ borderRadius: "4px" }}
-                              />
-                              {cat.name}
-                            </Link>
-                          </li>
+                          <li
+                          key={index}
+                          className={activeCategory === cat.category_id ? "active-li" : ""}
+                        >
+                          <Link
+                            to={`/categorywiseproduct/${cat.category_id}`}
+                            onClick={() => setActiveCategory(cat.category_id)
+                              
+                            }
+                            
+                            style={{
+                              color: activeCategory === cat.category_id ? "#007bff" : "black",
+                              fontWeight: activeCategory === cat.category_id ? "bold" : "normal",
+                              fontSize: "17px",
+                              display: "flex",
+                              alignItems: "center",
+                              gap: "10px",
+                            }}
+                          >
+                            <img
+                              src={cat.image}
+                              alt={cat.name}
+                              width="25"
+                              height="25"
+                              style={{
+                                borderRadius: "4px",
+                                border:
+                                  activeCategory === cat.category_id
+                                    ? "2px solid #007bff"
+                                    : "1px solid #ccc",
+                              }}
+                            />
+                            {cat.name}
+                          </Link>
+                        </li>
+                        
                         ))
                       )}
                     </ul>
@@ -180,7 +203,7 @@ export default function Shop() {
                 {isLoading ? (
                   <span>Loading...</span>
                 ) : (
-                  groceryItems.map((item) => {
+                  wisedata.map((item) => {
                     return (
                       <div className="col" key={item._id}>
                         <div className="product-box-3 h-100 wow fadeInUp">

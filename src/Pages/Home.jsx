@@ -15,6 +15,11 @@ export default function Home() {
     arrows: false,
     autoplay: true,
     autoplaySpeed: 3000,
+    responsive: [
+      { breakpoint: 1024, settings: { slidesToShow: 3 } },
+      { breakpoint: 768, settings: { slidesToShow: 2 } },
+      { breakpoint: 480, settings: { slidesToShow: 1 } },
+    ],
   };
 
   const settings2 = {
@@ -122,99 +127,101 @@ export default function Home() {
     <Slider {...settings} className="slider-4-banner">
       <div>
         <div className="banner-contain-3 hover-effect">
-          <a href="javascript:void(0)">
+          <Link to='/shop'>
             <img
-              src="../assets/images/grocery/banner/2.jpg"
+              src="https://img.freepik.com/free-photo/skin-care-cosmetology-products_658428-374.jpg" style={{height:'243px ' , width:'375px'}}
               className="bg-img blur-up lazyload"
-              alt="Summer Ice Cream"
+              alt="Personal Care"
             />
-          </a>
+          </Link>
           <div className="banner-detail p-center-left w-75 banner-p-sm mend-auto">
             <div>
-              <h5 className="fw-light mb-2">50% Discount</h5>
-              <h4 className="fw-bold mb-0">Summer Ice Cream</h4>
-              <button
-                onClick={() => (window.location.href = "shop-left-sidebar.html")}
+              <h5 className="fw-light mb-2">10% Discount</h5>
+              <h4 className="fw-bold mb-0">Personal Care</h4>
+              <Link to='/shop'
+
+              
                 className="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold"
               >
                 Shop Now <i className="fa-solid fa-chevron-right"></i>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-      
       <div>
         <div className="banner-contain-3 hover-effect">
-          <a href="javascript:void(0)">
+          <Link to='/shop'>
             <img
-              src="../assets/images/grocery/banner/3.jpg"
+              src="https://st2.depositphotos.com/1006458/6242/i/450/depositphotos_62425173-stock-photo-study-and-educted-related-items.jpg" style={{height:'243px ' , width:'375px'}}
               className="bg-img blur-up lazyload"
-              alt="Fruits Juice Series"
+              alt="Study material"
             />
-          </a>
+          </Link>
           <div className="banner-detail p-center-left w-75 banner-p-sm mend-auto">
             <div>
-              <h5 className="fw-light mb-2">Today Special</h5>
-              <h4 className="fw-bold mb-0">Fruits Juice Series</h4>
-              <button
-                onClick={() => (window.location.href = "shop-left-sidebar.html")}
+              <h5 className="fw-light mb-2">15% Discount</h5>
+              <h4 className="fw-bold mb-0">Study Material</h4>
+              <Link to='/shop'
+
+              
                 className="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold"
               >
                 Shop Now <i className="fa-solid fa-chevron-right"></i>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-      
       <div>
         <div className="banner-contain-3 hover-effect">
-          <a href="javascript:void(0)">
+          <Link to='/shop'>
             <img
-              src="../assets/images/grocery/banner/4.jpg"
+              src="https://img.freepik.com/premium-photo/stationery-items-shopping-trolley-left-side_93675-33603.jpg" style={{height:'243px ' , width:'375px'}}
               className="bg-img blur-up lazyload"
-              alt="Eat Healthy Be Healthy"
+              alt="Personal Care"
             />
-          </a>
+          </Link>
           <div className="banner-detail p-center-left w-75 banner-p-sm mend-auto">
             <div>
-              <h5 className="fw-light mb-2">Combo Offer</h5>
-              <h4 className="fw-bold mb-0">Eat Healthy Be Healthy</h4>
-              <button
-                onClick={() => (window.location.href = "shop-left-sidebar.html")}
+              <h5 className="fw-light mb-2">10% Discount</h5>
+              <h4 className="fw-bold mb-0">Stationary Items</h4>
+              <Link to='/shop'
+
+              
                 className="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold"
               >
                 Shop Now <i className="fa-solid fa-chevron-right"></i>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
-      
       <div>
         <div className="banner-contain-3 hover-effect">
-          <a href="javascript:void(0)">
+          <Link to='/shop'>
             <img
-              src="../assets/images/grocery/banner/5.jpg"
+              src="https://plus.unsplash.com/premium_photo-1714573122708-d1b42332e0a5?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fHNwb3J0cyUyMGVxdWlwbWVudHxlbnwwfHwwfHx8MA%3D%3D" style={{height:'243px ' , width:'375px'}}
               className="bg-img blur-up lazyload"
-              alt="As Fresh As Fruit"
+              alt="Personal Care"
             />
-          </a>
+          </Link>
           <div className="banner-detail p-center-left w-75 banner-p-sm mend-auto">
             <div>
-              <h5 className="fw-light mb-2">Amazing Deals</h5>
-              <h4 className="fw-bold mb-0">As Fresh As Fruit</h4>
-              <button
-                onClick={() => (window.location.href = "shop-left-sidebar.html")}
+              <h5 className="fw-light mb-2">10% Discount</h5>
+              <h4 className="fw-bold mb-0">Sports Items</h4>
+              <Link to='/shop'
+
+              
                 className="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold"
               >
                 Shop Now <i className="fa-solid fa-chevron-right"></i>
-              </button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
+     
     </Slider>
     </div>
   </div>

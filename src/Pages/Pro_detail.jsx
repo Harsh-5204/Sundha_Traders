@@ -1,37 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link } from "react-router-dom";
-
+import { Link, useParams } from "react-router-dom";
+import "../App.css"
 export default function Pro_detail() {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: true,
-        autoplay:true,
-        autoplaySpeed: 3000,
-       
-      };
+  const [details, setDetails] = useState([]);
+  let { id } = useParams();
 
-      const settings3 = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        arrows: true,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        responsive: [
-          { breakpoint: 1024, settings: { slidesToShow: 3 } },
-          { breakpoint: 768, settings: { slidesToShow: 2 } },
-          { breakpoint: 480, settings: { slidesToShow: 1 } },
-        ],
-      };
+  useEffect(() => {
+    fetch(`https://supermarket-e9sk.onrender.com/products/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setDetails(data.product);
+        console.log(data.product);
+      });
+  });
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
+
+  const settings3 = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      { breakpoint: 1024, settings: { slidesToShow: 3 } },
+      { breakpoint: 768, settings: { slidesToShow: 2 } },
+      { breakpoint: 480, settings: { slidesToShow: 1 } },
+    ],
+  };
   return (
     <div className="link-remover">
       {/* Breadcrumb Section Start */}
@@ -40,17 +51,15 @@ export default function Pro_detail() {
           <div className="row">
             <div className="col-12">
               <div className="breadcrumb-contain">
-                <h2>Creamy Chocolate Cake</h2>
+                <h2>{details.name}</h2>
                 <nav>
                   <ol className="breadcrumb mb-0">
                     <li className="breadcrumb-item">
-                     <Link to="/">
-                                         <i className="fa-solid fa-house" />
-                                       </Link>
+                      <Link to="/">
+                        <i className="fa-solid fa-house" />
+                      </Link>
                     </li>
-                    <li className="breadcrumb-item active">
-                      Creamy Chocolate Cake
-                    </li>
+                    <li className="breadcrumb-item active">{details.name}</li>
                   </ol>
                 </nav>
               </div>
@@ -69,27 +78,27 @@ export default function Pro_detail() {
                 <div className="col-xl-6 wow fadeInUp">
                   <div className="product-left-box">
                     <div className="row g-sm-4 g-2">
-                    <div className="col-12">
-      <Slider {...settings} className="product-main no-arrow">
-        <div>
-          <div className="slider-image">
-            <img
-              src="../assets/images/veg-2/product/21.png"
-              className="img-fluid image_zoom_cls-0 blur-up lazyload"
-              alt="Product"
-            />
-          </div>
-        </div>
-        <div>
-          <div className="slider-image">
-            <img
-              src="../assets/images/veg-2/product/22.png"
-              className="img-fluid image_zoom_cls-1 blur-up lazyload"
-              alt="Product"
-            />
-          </div>
-        </div>
-        <div>
+                      <div className="col-12">
+                        <Slider {...settings} className="product-main no-arrow">
+                          <div>
+                            <div className="slider-image">
+                              <img
+                                src={details.image}
+                                className="img-fluid image_zoom_cls-0 blur-up lazyload"
+                                alt="Product"
+                              />
+                            </div>
+                          </div>
+                          <div>
+                            <div className="slider-image">
+                              <img
+                                src={details.image}
+                                className="img-fluid image_zoom_cls-1 blur-up lazyload"
+                                alt="Product"
+                              />
+                            </div>
+                          </div>
+                          {/* <div>
           <div className="slider-image">
             <img
               src="../assets/images/veg-2/product/23.png"
@@ -124,9 +133,9 @@ export default function Pro_detail() {
               alt="Product"
             />
           </div>
-        </div>
-      </Slider>
-    </div>
+        </div> */}
+                        </Slider>
+                      </div>
                       {/* <div className="col-12">
                         <div className="left-slider-image left-slider no-arrow slick-top">
                           <div>
@@ -191,14 +200,15 @@ export default function Pro_detail() {
                 <div className="col-xl-6 wow fadeInUp">
                   <div className="right-box-contain">
                     <h6 className="offer-top">30% Off</h6>
-                    <h2 className="name">Full Sleeve T Shirts for Men</h2>
+                    <h2 className="name">{details.name}</h2>
                     <div className="price-rating">
                       <h3 className="theme-color price">
-                        $49.50 <del className="text-content">$58.46</del>{" "}
+                        {details.price}₹
+                        <del className="text-content">58.46₹</del>
                         <span className="offer theme-color">(8% off)</span>
                       </h3>
                       <div className="product-rating custom-rate">
-                        <ul className="rating">
+                        {/* <ul className="rating">
                           <li>
                             <i data-feather="star" className="fill" />
                           </li>
@@ -214,16 +224,14 @@ export default function Pro_detail() {
                           <li>
                             <i data-feather="star" />
                           </li>
-                        </ul>
-                        <span className="review">23 Customer Review</span>
+                        </ul> */}
+                        <span className="review">
+                          {details.reviews_count} Customers review
+                        </span>
                       </div>
                     </div>
                     <div className="product-contain">
-                      <p className="w-100">
-                        We prioritize the freshness of our oil, ensuring that
-                        every bottle delivers the highest quality and flavor for
-                        our customers' satisfaction.
-                      </p>
+                      <p className="w-100">{details.description}</p>
                     </div>
                     {/* <div className="product-package">
                       <div className="product-title">
@@ -286,7 +294,7 @@ export default function Pro_detail() {
                     </div> */}
                     <div className="note-box product-package">
                       <div className="cart_qty qty-box product-qty">
-                        <div className="input-group">
+                        {/* <div className="input-group">
                           <button
                             type="button"
                             className="qty-left-minus"
@@ -309,16 +317,13 @@ export default function Pro_detail() {
                           >
                             <i className="fa fa-plus" />
                           </button>
-                        </div>
+                        </div> */}
                       </div>
-                      <Link to='/cart'>
-                    <button
-                       
-                       className="btn btn-md bg-dark cart-button text-white w-100 "
-                     >
-                       Add To Cart
-                     </button>
-                    </Link>
+                      {/* <Link to="/contact"> */}
+                        {/* <Link to='/contact' className="btn btn-md bg-dark cart-button text-white w-100 ">
+                          Inquiry Now
+                        </Link> */}
+                      {/* </Link> */}
                     </div>
                     {/* <div className="buy-box">
                       <a href="wishlist.html">
@@ -346,26 +351,30 @@ export default function Pro_detail() {
                       <div className="product-info">
                         <ul className="product-info-list product-info-list-2">
                           <li>
-                            SKU : <a href="javascript:void(0)">GROC5LTR11</a>
+                            SKU : <a href="#">GROC5LTR11</a>
                           </li>
                           <li>
-                            Unit : <a href="javascript:void(0)">1 Ltr</a>
+                            Unit : <a href="#">{details.unit}</a>
                           </li>
                           <li>
-                            Weight : <a href="javascript:void(0)">4000 Gms</a>
+                            Weight : <a href="#">4000 Gms</a>
                           </li>
                           <li>
-                            Stock Status :{" "}
-                            <a href="javascript:void(0)">In Stock</a>
+                            Stock Status :<a href="#"></a>
                           </li>
                           <li>
-                            Quantity :{" "}
-                            <a href="javascript:void(0)">19 Items Left</a>
+                            Quantity :
+                            <a href="#">
+                              {details.quantity_available} available
+                            </a>
                           </li>
                         </ul>
+                        <Link to='/contact' className="btn btn-md bg-dark cart-button text-white w-100 ">
+                          Inquiry Now
+                        </Link>
                       </div>
                     </div>
-                    <div className="payment-option">
+                    {/* <div className="payment-option">
                       <div className="product-title">
                         <h4>Guaranteed Safe Checkout</h4>
                       </div>
@@ -416,7 +425,7 @@ export default function Pro_detail() {
                           </a>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -1149,269 +1158,408 @@ export default function Pro_detail() {
       </section>
       {/* Nav Tab Section End */}
 
-     {/* Related Product Section Start */}
-<section className="product-list-section section-b-space">
-  <div className="container-fluid-lg">
-    <div className="title">
-      <h2>Related Products</h2>
-      <span className="title-leaf">
-        <svg className="icon-width">
-          <use xlinkHref="../assets/svg/leaf.svg#leaf" />
-        </svg>
-      </span>
-    </div>
-    <div className="row">
-      <div className="col-12">
-        <div className="slider-7_1 arrow-slider img-slider">
-        <Slider {...settings3} className="slider-7_1 arrow-slider img-slider">
-          <div>
-            <div className="product-box-4 wow fadeInUp">
-              <div className="product-image product-image-2">
-                <a href="product-left-thumbnail.html">
-                  <img src="../assets/images/grocery/product/fruits-vegetables/1.png" className="img-fluid blur-up lazyload" alt="Bell Pepper" />
-                </a>
-                <ul className="option">
-                  <li data-bs-toggle="tooltip" title="Quick View">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
-                      <i className="iconly-Show icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Wishlist">
-                    <a href="javascript:void(0)" className="notifi-wishlist">
-                      <i className="iconly-Heart icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Compare">
-                    <a href="compare.html">
-                      <i className="iconly-Swap icli" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="product-detail">
-                <ul className="rating">
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" /></li>
-                </ul>
-                <a href="product-left-thumbnail.html">
-                  <h5 className="name text-title">Bell Pepper</h5>
-                </a>
-                <h5 className="price theme-color">$65.21<del>$71.25</del></h5>
-              </div>
-            </div>
+      {/* Related Product Section Start */}
+      <section className="product-list-section section-b-space">
+        <div className="container-fluid-lg">
+          <div className="title">
+            <h2>Related Products</h2>
+            <span className="title-leaf">
+              <svg className="icon-width">
+                <use xlinkHref="../assets/svg/leaf.svg#leaf" />
+              </svg>
+            </span>
           </div>
+          <div className="row">
+            <div className="col-12">
+              <div className="slider-7_1 arrow-slider img-slider">
+                <Slider
+                  {...settings3}
+                  className="slider-7_1 arrow-slider img-slider"
+                >
+                  <div>
+                    <div className="product-box-4 wow fadeInUp">
+                      <div className="product-image product-image-2">
+                        <a href="product-left-thumbnail.html">
+                          <img
+                            src="../assets/images/grocery/product/fruits-vegetables/1.png"
+                            className="img-fluid blur-up lazyload"
+                            alt="Bell Pepper"
+                          />
+                        </a>
+                        <ul className="option">
+                          <li data-bs-toggle="tooltip" title="Quick View">
+                            <a
+                              href="javascript:void(0)"
+                              data-bs-toggle="modal"
+                              data-bs-target="#view"
+                            >
+                              <i className="iconly-Show icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Wishlist">
+                            <a
+                              href="javascript:void(0)"
+                              className="notifi-wishlist"
+                            >
+                              <i className="iconly-Heart icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Compare">
+                            <a href="compare.html">
+                              <i className="iconly-Swap icli" />
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="product-detail">
+                        <ul className="rating">
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" />
+                          </li>
+                        </ul>
+                        <a href="product-left-thumbnail.html">
+                          <h5 className="name text-title">Bell Pepper</h5>
+                        </a>
+                        <h5 className="price theme-color">
+                          $65.21<del>$71.25</del>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
 
-          <div>
-            <div className="product-box-4 wow fadeInUp">
-              <div className="product-image product-image-2">
-                <a href="product-left-thumbnail.html">
-                  <img src="../assets/images/grocery/product/fruits-vegetables/2.png" className="img-fluid blur-up lazyload" alt="Eggplant" />
-                </a>
-                <ul className="option">
-                  <li data-bs-toggle="tooltip" title="Quick View">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
-                      <i className="iconly-Show icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Wishlist">
-                    <a href="javascript:void(0)" className="notifi-wishlist">
-                      <i className="iconly-Heart icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Compare">
-                    <a href="compare.html">
-                      <i className="iconly-Swap icli" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="product-detail">
-                <ul className="rating">
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" /></li>
-                </ul>
-                <a href="product-left-thumbnail.html">
-                  <h5 className="name text-title">Eggplant</h5>
-                </a>
-                <h5 className="price theme-color">$65.21<del>$71.25</del></h5>
-              </div>
-            </div>
-          </div>
+                  <div>
+                    <div className="product-box-4 wow fadeInUp">
+                      <div className="product-image product-image-2">
+                        <a href="product-left-thumbnail.html">
+                          <img
+                            src="../assets/images/grocery/product/fruits-vegetables/2.png"
+                            className="img-fluid blur-up lazyload"
+                            alt="Eggplant"
+                          />
+                        </a>
+                        <ul className="option">
+                          <li data-bs-toggle="tooltip" title="Quick View">
+                            <a
+                              href="javascript:void(0)"
+                              data-bs-toggle="modal"
+                              data-bs-target="#view"
+                            >
+                              <i className="iconly-Show icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Wishlist">
+                            <a
+                              href="javascript:void(0)"
+                              className="notifi-wishlist"
+                            >
+                              <i className="iconly-Heart icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Compare">
+                            <a href="compare.html">
+                              <i className="iconly-Swap icli" />
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="product-detail">
+                        <ul className="rating">
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" />
+                          </li>
+                        </ul>
+                        <a href="product-left-thumbnail.html">
+                          <h5 className="name text-title">Eggplant</h5>
+                        </a>
+                        <h5 className="price theme-color">
+                          $65.21<del>$71.25</del>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
 
-          <div>
-            <div className="product-box-4 wow fadeInUp">
-              <div className="product-image product-image-2">
-                <a href="product-left-thumbnail.html">
-                  <img src="../assets/images/grocery/product/fruits-vegetables/2.png" className="img-fluid blur-up lazyload" alt="Eggplant" />
-                </a>
-                <ul className="option">
-                  <li data-bs-toggle="tooltip" title="Quick View">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
-                      <i className="iconly-Show icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Wishlist">
-                    <a href="javascript:void(0)" className="notifi-wishlist">
-                      <i className="iconly-Heart icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Compare">
-                    <a href="compare.html">
-                      <i className="iconly-Swap icli" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="product-detail">
-                <ul className="rating">
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" /></li>
-                </ul>
-                <a href="product-left-thumbnail.html">
-                  <h5 className="name text-title">Eggplant</h5>
-                </a>
-                <h5 className="price theme-color">$65.21<del>$71.25</del></h5>
-              </div>
-            </div>
-          </div>
+                  <div>
+                    <div className="product-box-4 wow fadeInUp">
+                      <div className="product-image product-image-2">
+                        <a href="product-left-thumbnail.html">
+                          <img
+                            src="../assets/images/grocery/product/fruits-vegetables/2.png"
+                            className="img-fluid blur-up lazyload"
+                            alt="Eggplant"
+                          />
+                        </a>
+                        <ul className="option">
+                          <li data-bs-toggle="tooltip" title="Quick View">
+                            <a
+                              href="javascript:void(0)"
+                              data-bs-toggle="modal"
+                              data-bs-target="#view"
+                            >
+                              <i className="iconly-Show icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Wishlist">
+                            <a
+                              href="javascript:void(0)"
+                              className="notifi-wishlist"
+                            >
+                              <i className="iconly-Heart icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Compare">
+                            <a href="compare.html">
+                              <i className="iconly-Swap icli" />
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="product-detail">
+                        <ul className="rating">
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" />
+                          </li>
+                        </ul>
+                        <a href="product-left-thumbnail.html">
+                          <h5 className="name text-title">Eggplant</h5>
+                        </a>
+                        <h5 className="price theme-color">
+                          $65.21<del>$71.25</del>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
 
-          <div>
-            <div className="product-box-4 wow fadeInUp">
-              <div className="product-image product-image-2">
-                <a href="product-left-thumbnail.html">
-                  <img src="../assets/images/grocery/product/fruits-vegetables/2.png" className="img-fluid blur-up lazyload" alt="Eggplant" />
-                </a>
-                <ul className="option">
-                  <li data-bs-toggle="tooltip" title="Quick View">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
-                      <i className="iconly-Show icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Wishlist">
-                    <a href="javascript:void(0)" className="notifi-wishlist">
-                      <i className="iconly-Heart icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Compare">
-                    <a href="compare.html">
-                      <i className="iconly-Swap icli" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="product-detail">
-                <ul className="rating">
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" /></li>
-                </ul>
-                <a href="product-left-thumbnail.html">
-                  <h5 className="name text-title">Eggplant</h5>
-                </a>
-                <h5 className="price theme-color">$65.21<del>$71.25</del></h5>
-              </div>
-            </div>
-          </div>
+                  <div>
+                    <div className="product-box-4 wow fadeInUp">
+                      <div className="product-image product-image-2">
+                        <a href="product-left-thumbnail.html">
+                          <img
+                            src="../assets/images/grocery/product/fruits-vegetables/2.png"
+                            className="img-fluid blur-up lazyload"
+                            alt="Eggplant"
+                          />
+                        </a>
+                        <ul className="option">
+                          <li data-bs-toggle="tooltip" title="Quick View">
+                            <a
+                              href="javascript:void(0)"
+                              data-bs-toggle="modal"
+                              data-bs-target="#view"
+                            >
+                              <i className="iconly-Show icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Wishlist">
+                            <a
+                              href="javascript:void(0)"
+                              className="notifi-wishlist"
+                            >
+                              <i className="iconly-Heart icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Compare">
+                            <a href="compare.html">
+                              <i className="iconly-Swap icli" />
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="product-detail">
+                        <ul className="rating">
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" />
+                          </li>
+                        </ul>
+                        <a href="product-left-thumbnail.html">
+                          <h5 className="name text-title">Eggplant</h5>
+                        </a>
+                        <h5 className="price theme-color">
+                          $65.21<del>$71.25</del>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
 
-          <div>
-            <div className="product-box-4 wow fadeInUp">
-              <div className="product-image product-image-2">
-                <a href="product-left-thumbnail.html">
-                  <img src="../assets/images/grocery/product/fruits-vegetables/2.png" className="img-fluid blur-up lazyload" alt="Eggplant" />
-                </a>
-                <ul className="option">
-                  <li data-bs-toggle="tooltip" title="Quick View">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
-                      <i className="iconly-Show icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Wishlist">
-                    <a href="javascript:void(0)" className="notifi-wishlist">
-                      <i className="iconly-Heart icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Compare">
-                    <a href="compare.html">
-                      <i className="iconly-Swap icli" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="product-detail">
-                <ul className="rating">
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" /></li>
-                </ul>
-                <a href="product-left-thumbnail.html">
-                  <h5 className="name text-title">Eggplant</h5>
-                </a>
-                <h5 className="price theme-color">$65.21<del>$71.25</del></h5>
-              </div>
-            </div>
-          </div>
+                  <div>
+                    <div className="product-box-4 wow fadeInUp">
+                      <div className="product-image product-image-2">
+                        <a href="product-left-thumbnail.html">
+                          <img
+                            src="../assets/images/grocery/product/fruits-vegetables/2.png"
+                            className="img-fluid blur-up lazyload"
+                            alt="Eggplant"
+                          />
+                        </a>
+                        <ul className="option">
+                          <li data-bs-toggle="tooltip" title="Quick View">
+                            <a
+                              href="javascript:void(0)"
+                              data-bs-toggle="modal"
+                              data-bs-target="#view"
+                            >
+                              <i className="iconly-Show icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Wishlist">
+                            <a
+                              href="javascript:void(0)"
+                              className="notifi-wishlist"
+                            >
+                              <i className="iconly-Heart icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Compare">
+                            <a href="compare.html">
+                              <i className="iconly-Swap icli" />
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="product-detail">
+                        <ul className="rating">
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" />
+                          </li>
+                        </ul>
+                        <a href="product-left-thumbnail.html">
+                          <h5 className="name text-title">Eggplant</h5>
+                        </a>
+                        <h5 className="price theme-color">
+                          $65.21<del>$71.25</del>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
 
-          <div>
-            <div className="product-box-4 wow fadeInUp">
-              <div className="product-image product-image-2">
-                <a href="product-left-thumbnail.html">
-                  <img src="../assets/images/grocery/product/fruits-vegetables/2.png" className="img-fluid blur-up lazyload" alt="Eggplant" />
-                </a>
-                <ul className="option">
-                  <li data-bs-toggle="tooltip" title="Quick View">
-                    <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
-                      <i className="iconly-Show icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Wishlist">
-                    <a href="javascript:void(0)" className="notifi-wishlist">
-                      <i className="iconly-Heart icli" />
-                    </a>
-                  </li>
-                  <li data-bs-toggle="tooltip" title="Compare">
-                    <a href="compare.html">
-                      <i className="iconly-Swap icli" />
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div className="product-detail">
-                <ul className="rating">
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" className="fill" /></li>
-                  <li><i data-feather="star" /></li>
-                </ul>
-                <a href="product-left-thumbnail.html">
-                  <h5 className="name text-title">Eggplant</h5>
-                </a>
-                <h5 className="price theme-color">$65.21<del>$71.25</del></h5>
+                  <div>
+                    <div className="product-box-4 wow fadeInUp">
+                      <div className="product-image product-image-2">
+                        <a href="product-left-thumbnail.html">
+                          <img
+                            src="../assets/images/grocery/product/fruits-vegetables/2.png"
+                            className="img-fluid blur-up lazyload"
+                            alt="Eggplant"
+                          />
+                        </a>
+                        <ul className="option">
+                          <li data-bs-toggle="tooltip" title="Quick View">
+                            <a
+                              href="javascript:void(0)"
+                              data-bs-toggle="modal"
+                              data-bs-target="#view"
+                            >
+                              <i className="iconly-Show icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Wishlist">
+                            <a
+                              href="javascript:void(0)"
+                              className="notifi-wishlist"
+                            >
+                              <i className="iconly-Heart icli" />
+                            </a>
+                          </li>
+                          <li data-bs-toggle="tooltip" title="Compare">
+                            <a href="compare.html">
+                              <i className="iconly-Swap icli" />
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div className="product-detail">
+                        <ul className="rating">
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" className="fill" />
+                          </li>
+                          <li>
+                            <i data-feather="star" />
+                          </li>
+                        </ul>
+                        <a href="product-left-thumbnail.html">
+                          <h5 className="name text-title">Eggplant</h5>
+                        </a>
+                        <h5 className="price theme-color">
+                          $65.21<del>$71.25</del>
+                        </h5>
+                      </div>
+                    </div>
+                  </div>
+                </Slider>
               </div>
             </div>
           </div>
-        </Slider>
         </div>
-      </div>
-    </div>
-    
-  </div>
-</section>
-{/* Related Product Section End */}
-
+      </section>
+      {/* Related Product Section End */}
     </div>
   );
 }

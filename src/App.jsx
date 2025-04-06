@@ -11,6 +11,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Shop from './Pages/Shop';
 import Pro_detail from './Pages/Pro_detail';
 import Cart from './Pages/Cart';
+import CategoryWise from './Pages/CategoryWise';
 
 
 function App() {
@@ -23,8 +24,9 @@ function App() {
     <Route path='/contact' element={<Contact/>}/>
     <Route path='/about' element={<About/>}/>
     <Route path='/shop' element={<Shop/>}/> 
-    <Route path='/productdetail' element={<Pro_detail/>} />  
+    <Route path='/productdetail/:id' element={<Pro_detail/>} />  
     <Route path='/cart' element={<Cart/>} />  
+    <Route path='/categorywiseproduct/:category_id' element={<CategoryWise/>}/>
 
  </Routes>
   <Footer/>

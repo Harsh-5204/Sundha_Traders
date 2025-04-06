@@ -2,3 +2,14 @@
 {
   text-decoration: none;
 }
+
+.nav-link.active {
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+}
+
+.active-li {
+  background-color: #e7f1ff;
+  border-radius: 4px;
+}

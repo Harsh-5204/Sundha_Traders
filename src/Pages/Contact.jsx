@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Contact() {
+  const [result, setResult] = useState("");
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending....");
+    const formData = new FormData(event.target);
+
+    formData.append("access_key", "b7858090-27f9-4f61-8d9c-2fffb45d4563");
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setResult("Your Form Submitted Successfully!! Owner will Contact You Soon...");
+      event.target.reset();
+    } else {
+      console.log("Error", data);
+      setResult(data.message);
+    }
+  };
+ 
   return (
     <div>
       <div className="link-remover">
@@ -116,112 +140,115 @@ export default function Contact() {
                 <div className="title d-xxl-none d-block">
                   <h2>Contact Us</h2>
                 </div>
-                <div className="right-sidebar-box">
-                  <div className="row">
-                    <div className="col-xxl-6 col-lg-12 col-sm-6">
-                      <div className="mb-md-4 mb-3 custom-form">
-                        <label
-                          htmlFor="exampleFormControlInput"
-                          className="form-label"
-                        >
-                          First Name
-                        </label>
-                        <div className="custom-input">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="exampleFormControlInput"
-                            placeholder="Enter First Name"
-                          />
-                          <i className="fa-solid fa-user" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-xxl-6 col-lg-12 col-sm-6">
-                      <div className="mb-md-4 mb-3 custom-form">
-                        <label
-                          htmlFor="exampleFormControlInput1"
-                          className="form-label"
-                        >
-                          Last Name
-                        </label>
-                        <div className="custom-input">
-                          <input
-                            type="text"
-                            className="form-control"
-                            id="exampleFormControlInput1"
-                            placeholder="Enter Last Name"
-                          />
-                          <i className="fa-solid fa-user" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-xxl-6 col-lg-12 col-sm-6">
-                      <div className="mb-md-4 mb-3 custom-form">
-                        <label
-                          htmlFor="exampleFormControlInput2"
-                          className="form-label"
-                        >
-                          Email Address
-                        </label>
-                        <div className="custom-input">
-                          <input
-                            type="email"
-                            className="form-control"
-                            id="exampleFormControlInput2"
-                            placeholder="Enter Email Address"
-                          />
-                          <i className="fa-solid fa-envelope" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-xxl-6 col-lg-12 col-sm-6">
-                      <div className="mb-md-4 mb-3 custom-form">
-                        <label
-                          htmlFor="exampleFormControlInput3"
-                          className="form-label"
-                        >
-                          Phone Number
-                        </label>
-                        <div className="custom-input">
-                          <input
-                            type="tel"
-                            className="form-control"
-                            id="exampleFormControlInput3"
-                            placeholder="Enter Your Phone Number"
-                            maxLength={10}
-                            oninput="javascript: if (this.value.length > this.maxLength) this.value =
-                                      this.value.slice(0, this.maxLength);"
-                          />
-                          <i className="fa-solid fa-mobile-screen-button" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-12">
-                      <div className="mb-md-4 mb-3 custom-form">
-                        <label
-                          htmlFor="exampleFormControlTextarea"
-                          className="form-label"
-                        >
-                          Message
-                        </label>
-                        <div className="custom-textarea">
-                          <textarea
-                            className="form-control"
-                            id="exampleFormControlTextarea"
-                            placeholder="Enter Your Message"
-                            rows={6}
-                            defaultValue={""}
-                          />
-                          <i className="fa-solid fa-message" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <button className=" btn btn-animation btn-md fw-bold text-light  ms-auto">
-                    Send Message
-                  </button>
-                </div>
+                <form onSubmit={onSubmit} className="right-sidebar-box">
+      <div className="row">
+        <div className="col-xxl-6 col-lg-12 col-sm-6">
+          <div className="mb-md-4 mb-3 custom-form">
+            <label htmlFor="firstName" className="form-label">
+              First Name
+            </label>
+            <div className="custom-input">
+              <input
+                type="text"
+                className="form-control"
+                id="firstName"
+                name="first_name"
+                placeholder="Enter First Name"
+                required
+              />
+              <i className="fa-solid fa-user" />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-xxl-6 col-lg-12 col-sm-6">
+          <div className="mb-md-4 mb-3 custom-form">
+            <label htmlFor="lastName" className="form-label">
+              Last Name
+            </label>
+            <div className="custom-input">
+              <input
+                type="text"
+                className="form-control"
+                id="lastName"
+                name="last_name"
+                placeholder="Enter Last Name"
+                required
+              />
+              <i className="fa-solid fa-user" />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-xxl-6 col-lg-12 col-sm-6">
+          <div className="mb-md-4 mb-3 custom-form">
+            <label htmlFor="email" className="form-label">
+              Email Address
+            </label>
+            <div className="custom-input">
+              <input
+                type="email"
+                className="form-control"
+                id="email"
+                name="email"
+                placeholder="Enter Email Address"
+                required
+              />
+              <i className="fa-solid fa-envelope" />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-xxl-6 col-lg-12 col-sm-6">
+          <div className="mb-md-4 mb-3 custom-form">
+            <label htmlFor="phone" className="form-label">
+              Phone Number
+            </label>
+            <div className="custom-input">
+              <input
+                type="tel"
+                className="form-control"
+                id="phone"
+                name="phone"
+                placeholder="Enter Your Phone Number"
+                maxLength={10}
+                onInput={(e) => {
+                  if (e.target.value.length > 10) {
+                    e.target.value = e.target.value.slice(0, 10);
+                  }
+                }}
+                required
+              />
+              <i className="fa-solid fa-mobile-screen-button" />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-12">
+          <div className="mb-md-4 mb-3 custom-form">
+            <label htmlFor="message" className="form-label">
+              Message
+            </label>
+            <div className="custom-textarea">
+              <textarea
+                className="form-control"
+                id="message"
+                name="message"
+                placeholder="Enter Your Message"
+                rows={6}
+                required
+              />
+              <i className="fa-solid fa-message" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" className="btn btn-animation btn-md fw-bold text-light ms-auto ">
+        Send Message
+      </button><br/>
+      {/* <span className="mt-5">{result}</span> */}
+    </form>
               </div>
             </div>
           </div>
